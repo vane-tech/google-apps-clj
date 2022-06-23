@@ -77,14 +77,14 @@
                     assert)
         auth-request-url (doto (.newAuthorizationUrl auth-flow)
                            assert
-                           (.setRedirectUri "urn:ietf:wg:oauth:2.0:oob"))
+                           (.setRedirectUri "http://localhost"))
         auth-url (.build auth-request-url)
         _ (println "Please visit the following url and input the code "
                    "that appears on the screen: " auth-url)
         auth-code (doto ^String (read-line) assert)
         token-request (doto (.newTokenRequest auth-flow auth-code)
                         assert
-                        (.setRedirectUri "urn:ietf:wg:oauth:2.0:oob"))]
+                        (.setRedirectUri "http://localhost"))]
     (doto (.execute token-request)
       assert)))
 
